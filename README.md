@@ -1,23 +1,23 @@
-# CRUD 
+CRUD 
 
 Este projeto é uma aplicação simples de CRUD desenvolvida em Python, utilizando SQLite como banco de dados e Tkinter para a interface gráfica.
 
-## 📌 Funcionalidades
+ Funcionalidades
 
 - Adicionar contatos com nome, e-mail, telefone, endereço e CPF
 - Listar todos os contatos cadastrados
 - Atualizar informações de um contato existente
 - Excluir contatos da lista
 
-## 🛠️ Tecnologias Utilizadas
+Tecnologias Utilizadas
 
 - Python 3
 - SQLite3 (banco de dados local)
 - Tkinter (interface gráfica)
 
-## 📂 Estrutura do Código
+Estrutura do Código
 
-### 1. Conexão com o Banco de Dados
+1. Conexão com o Banco de Dados
 
 A função `conectar()` estabelece a conexão com o banco de dados `banco.db`.
 
@@ -45,10 +45,9 @@ A função `criar_tabela()` cria a tabela `contatos` caso ela não exista:
      conexao.commit()
      conexao.close()
 ```
+2. CRUD (Create, Read, Update, Delete)
 
-### 2. CRUD (Create, Read, Update, Delete)
-
-#### Criar Contato
+Criar Contato
 
 A função `adicionar_contato()` recebe os dados do usuário e insere-os no banco de dados.
 
@@ -75,7 +74,7 @@ A função `adicionar_contato()` recebe os dados do usuário e insere-os no banc
          messagebox.showwarning("Atenção", "Preencha todos os campos!")
 ```
 
-#### Listar Contatos
+Listar Contatos
 
 A função `listar_contatos()` busca e exibe os contatos cadastrados na interface gráfica.
 
@@ -92,7 +91,7 @@ A função `listar_contatos()` busca e exibe os contatos cadastrados na interfac
          tree.insert("", tk.END, values=contato)
 ```
 
-#### Excluir Contato
+Excluir Contato
 
 A função `excluir_contato()` remove um contato selecionado.
 
@@ -112,7 +111,7 @@ A função `excluir_contato()` remove um contato selecionado.
          messagebox.showwarning("Atenção", "Selecione um contato para excluir!")
 ```
 
-#### Atualizar Contato
+Atualizar Contato
 
 A função `atualizar_contato()` permite editar um contato existente.
 
@@ -143,7 +142,7 @@ A função `atualizar_contato()` permite editar um contato existente.
          messagebox.showwarning("Atenção", "Selecione um contato para atualizar!")
 ```
 
-## 🎨 Interface Gráfica (Tkinter)
+ Interface Gráfica (Tkinter)
 
 A interface é composta por:
 
@@ -158,7 +157,7 @@ A interface é composta por:
  root.configure(bg="#f0f0f0")
 ```
 
-## ▶️ Como Executar o Projeto
+Como Executar o Projeto
 
 1. Certifique-se de ter o Python instalado.
 2. Instale a biblioteca Tkinter (caso necessário).
@@ -167,14 +166,4 @@ A interface é composta por:
 ```sh
 python nome_do_arquivo.py
 ```
-
-4. A interface será aberta e você poderá gerenciar seus contatos.
-
-## 📜 Licença
-
-Este projeto é de código aberto e pode ser utilizado livremente.
-
----
-
-📌 **Desenvolvido com Python e Tkinter** 🚀
 
