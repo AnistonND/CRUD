@@ -1,0 +1,94 @@
+import sqlite3
+
+def conectar():
+    return sqlite3.connect("banco.db")
+
+def criar_tabela():
+    conexao = conectar()
+    cursor = conexao.cursor()
+    cursor.execute('''
+        CREATE TABLE IF NOT EXISTS contatos (
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            nome TEXT NOT NULL,
+            email TEXT NOT NULL,
+            telefone TEXT NOT NULL
+        )
+    ''')
+    conexao.commit()
+    conexao.close()
+
+def adicionar_contato(nome, email, telefone):
+    conexao = conectar()
+    cursor = conexao.cursor()
+    cursor.execute("INSERT INTO contatos (nome, email, telefone) VALUES (?, ?, ?)", (nome, email, telefone))
+    conexao.commit()
+    conexao.close()
+
+def listar_contatos():
+    conexao = conectar()
+    cursor = conexao.cursor()
+    cursor.execute("SELECT * FROM contatos")
+    contatos = cursor.fetchall()
+    conexao.close()
+    return contatos
+
+def atualizar_contato(id_contato, nome, email, telefone):
+    conexao = conectar()
+    cursor = conexao.cursor()
+    cursor.execute("UPDATE contatos SET nome = ?, email = ?, telefone = ? WHERE id = ?", (nome, email, telefone, id_contato))
+    conexao.commit()
+    conexao.close()
+
+def excluir_contato(id_contato):
+    conexao = conectar()
+    cursor = conexao.cursor()
+    cursor.execute("DELETE FROM contatos WHERE id = ?", (id_contato,))
+    conexao.commit()
+    conexao.close()
+
+def main():
+    criar_tabela()
+    
+    while True:
+        print("\n1. Adicionar contato")
+        print("2. Listar contatos")
+        print("3. Atualizar contato")
+        print("4. Excluir contato")
+        print("5. Sair")
+        
+        opcao = input("Escolha uma opção: ")
+        
+        if opcao == "1":
+            nome = input("Nome: ")
+            email = input("Email: ")
+            telefone = input("Telefone: ")
+            adicionar_contato(nome, email, telefone)
+            print("Contato adicionado com sucesso!")
+        
+        elif opcao == "2":
+            contatos = listar_contatos()
+            for contato in contatos:
+                print(f"ID: {contato[0]}, Nome: {contato[1]}, Email: {contato[2]}, Telefone: {contato[3]}")
+        
+        elif opcao == "3":
+            id_contato = input("ID do contato a ser atualizado: ")
+            nome = input("Novo Nome: ")
+            email = input("Novo E-mail: ")
+            telefone = input("Novo Telefone: ")
+            atualizar_contato(id_contato, nome, email, telefone)
+            print("Contato atualizado com sucesso!")
+        
+        elif opcao == "4":
+            id_contato = input("ID do contato a ser excluído: ")
+            excluir_contato(id_contato)
+            print("Contato excluído com sucesso!")
+        
+        elif opcao == "5":
+            print("Saindo...")
+            break
+        
+        else:
+            print("Opção inválida! Tente novamente.")
+
+if __name__ == "__main__":
+    main()
